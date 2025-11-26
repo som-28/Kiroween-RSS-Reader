@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="graveyard">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Test</title>
+  <style>
+    /* Theme Variables - Default (Graveyard) */
+    :root,
+    html,
+    html[data-theme='graveyard'] {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #f0f0f0;
+      --accent-primary: #ff6b35;
+      --accent-secondary: #8a07d7;
+      --accent-glow: rgba(255, 107, 53, 0.3);
+    }
+
+    /* Haunted Mansion Theme */
+    html[data-theme='haunted-mansion'] {
+      --bg-primary: #0d0515;
+      --bg-secondary: #1a0f2e;
+      --text-primary: #e8d5ff;
+      --accent-primary: #a52fff;
+      --accent-secondary: #ff6b35;
+      --accent-glow: rgba(165, 47, 255, 0.4);
+    }
+
+    /* Witch Cottage Theme */
+    html[data-theme='witch-cottage'] {
+      --bg-primary: #0a1505;
+      --bg-secondary: #152a0f;
+      --text-primary: #e0ffe0;
+      --accent-primary: #39ff14;
+      --accent-secondary: #ff6b35;
+      --accent-glow: rgba(57, 255, 20, 0.3);
+    }
+
+    html {
+      background-color: var(--bg-primary);
+      transition: background-color 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Inter', 'Roboto', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--accent-primary);
+      margin-bottom: 30px;
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 15px 30px;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 2px solid var(--accent-primary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--accent-primary);
+      color: #000;
+    }
+
+    .info-box {
+      background-color: var(--bg-secondary);
+      border: 2px solid var(--accent-primary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .color-swatch {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      margin-right: 10px;
+      vertical-align: middle;
+      border: 2px solid var(--text-primary);
+    }
+
+    .current-theme {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent-primary);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎃 Theme System Test</h1>
+    
+    <div class="current-theme">
+      Current Theme: <span id="current-theme-name">Graveyard</span>
+    </div>
+
+    <div class="theme-buttons">
+      <button onclick="setTheme('graveyard')">🪦 Graveyard</button>
+      <button onclick="setTheme('haunted-mansion')">🏚️ Haunted Mansion</button>
+      <button onclick="setTheme('witch-cottage')">🧙 Witch Cottage</button>
+    </div>
+
+    <div class="info-box">
+      <h2>Current Colors:</h2>
+      <p>
+        <span class="color-swatch" id="bg-primary-swatch"></span>
+        Background Primary: <span id="bg-primary-value"></span>
+      </p>
+      <p>
+        <span class="color-swatch" id="accent-primary-swatch"></span>
+        Accent Primary: <span id="accent-primary-value"></span>
+      </p>
+      <p>
+        <span class="color-swatch" id="text-primary-swatch"></span>
+        Text Primary: <span id="text-primary-value"></span>
+      </p>
+    </div>
+
+    <div class="info-box">
+      <h2>Instructions:</h2>
+      <p>Click the theme buttons above to switch between themes.</p>
+      <p>You should see:</p>
+      <ul>
+        <li>Background color change</li>
+        <li>Text color change</li>
+        <li>Button border color change</li>
+        <li>Smooth transitions</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <h2>HTML Attribute:</h2>
+      <p>data-theme = "<span id="data-theme-value">graveyard</span>"</p>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(themeName) {
+      const html = document.documentElement;
+      html.setAttribute('data-theme', themeName);
+      
+      // Update display
+      const themeNames = {
+        'graveyard': 'Graveyard',
+        'haunted-mansion': 'Haunted Mansion',
+        'witch-cottage': 'Witch Cottage'
+      };
+      document.getElementById('current-theme-name').textContent = themeNames[themeName];
+      document.getElementById('data-theme-value').textContent = themeName;
+      
+      // Update color values
+      updateColorDisplay();
+    }
+
+    function updateColorDisplay() {
+      const styles = getComputedStyle(document.documentElement);
+      
+      const bgPrimary = styles.getPropertyValue('--bg-primary').trim();
+      const accentPrimary = styles.getPropertyValue('--accent-primary').trim();
+      const textPrimary = styles.getPropertyValue('--text-primary').trim();
+      
+      document.getElementById('bg-primary-value').textContent = bgPrimary;
+      document.getElementById('bg-primary-swatch').style.backgroundColor = bgPrimary;
+      
+      document.getElementById('accent-primary-value').textContent = accentPrimary;
+      document.getElementById('accent-primary-swatch').style.backgroundColor = accentPrimary;
+      
+      document.getElementById('text-primary-value').textContent = textPrimary;
+      document.getElementById('text-primary-swatch').style.backgroundColor = textPrimary;
+    }
+
+    // Initialize
+    updateColorDisplay();
+  </script>
+</body>
+</html>
