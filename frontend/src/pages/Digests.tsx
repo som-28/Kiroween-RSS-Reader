@@ -39,7 +39,8 @@ export default function Digests() {
   // Load preferences
   const loadPreferences = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/preferences');
+      const { API_CONFIG } = await import('../config/api');
+      const response = await fetch(`${API_CONFIG.BASE_URL}/preferences`);
       if (!response.ok) throw new Error('Failed to load preferences');
       const data = await response.json();
       setPreferences({

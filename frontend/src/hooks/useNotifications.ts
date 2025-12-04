@@ -4,8 +4,9 @@ import {
   NotificationData,
   NotificationPermission,
 } from '../services/notificationService';
+import { API_CONFIG } from '../config/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = API_CONFIG.BASE_URL;
 
 interface UseNotificationsReturn {
   permission: NotificationPermission;

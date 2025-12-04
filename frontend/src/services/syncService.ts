@@ -94,7 +94,8 @@ class SyncService {
   }
 
   private async executeOperation(operation: PendingOperation): Promise<void> {
-    const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    const { getBaseUrl } = await import('../config/api');
+    const baseURL = getBaseUrl();
 
     switch (operation.entity) {
       case 'feed':

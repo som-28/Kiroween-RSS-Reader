@@ -292,13 +292,13 @@ class ApiClient {
 /**
  * Create and export the default API client instance
  */
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+import { API_CONFIG } from '../config/api';
 
 export const apiClient = new ApiClient({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  retryAttempts: 3,
-  retryDelay: 1000,
+  baseURL: API_CONFIG.BASE_URL,
+  timeout: API_CONFIG.TIMEOUT,
+  retryAttempts: API_CONFIG.RETRY_ATTEMPTS,
+  retryDelay: API_CONFIG.RETRY_DELAY,
 });
 
 /**

@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { feedService } from '../../services/feedService';
 import type { Feed } from '../../types/models';
+import { API_CONFIG } from '../../config/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE_URL = API_CONFIG.BASE_URL;
 
 export interface ArticleFilterState {
   feedIds: string[];

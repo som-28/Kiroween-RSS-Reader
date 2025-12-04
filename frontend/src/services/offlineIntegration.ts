@@ -9,8 +9,9 @@ import axios from 'axios';
 import { cacheStorage, CachedFeed, CachedArticle, CachedDigest } from './db';
 import { syncService } from './syncService';
 import { cacheManager } from './cacheManager';
+import { getBaseUrl } from '../config/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE_URL = getBaseUrl();
 
 // Helper to check if we're online
 const isOnline = (): boolean => syncService.getOnlineStatus();
